@@ -26,42 +26,42 @@ pipeline-build: pipeline-init build
 
 ## gateway ##
 
-.PHONY: clean-gateway
-clean-gateway:
-	rm -rf ./protogen/gateway
-	mkdir -p ./protogen/gateway/go
-	mkdir -p ./protogen/gateway/openapiv2
+# .PHONY: clean-gateway
+# clean-gateway:
+# 	rm -rf ./protogen/gateway
+# 	mkdir -p ./protogen/gateway/go
+# 	mkdir -p ./protogen/gateway/openapiv2
 
-.PHONY: protoc-go-gateway
-protoc-go-gateway:
-	protoc -I . \
-	--grpc-gateway_out ./protogen/gateway/go \
-	--grpc-gateway_opt logtostderr=true \
-	--grpc-gateway_opt paths=source_relative \
-	--grpc-gateway_opt grpc_api_configuration=./grpc-gateway/config.yml \
-	--grpc-gateway_opt standalone=true \
-	--grpc-gateway_opt generate_unbound_methods=true \
-	./proto/hello/*.proto
+# .PHONY: protoc-go-gateway
+# protoc-go-gateway:
+# 	protoc -I . \
+# 	--grpc-gateway_out ./protogen/gateway/go \
+# 	--grpc-gateway_opt logtostderr=true \
+# 	--grpc-gateway_opt paths=source_relative \
+# 	--grpc-gateway_opt grpc_api_configuration=./grpc-gateway/config.yml \
+# 	--grpc-gateway_opt standalone=true \
+# 	--grpc-gateway_opt generate_unbound_methods=true \
+# 	./proto/hello/*.proto
 
-.PHONY: protoc-openapiv2-gateway
-protoc-openapiv2-gateway:
-	protoc -I . --openapiv2_out ./protogen/gateway/openapiv2 \
-	--openapiv2_opt logtostderr=true \
-	--openapiv2_opt output_format=yaml \
-	--openapiv2_opt grpc_api_configuration=./grpc-gateway/config.yml \
-	--openapiv2_opt openapi_configuration=./grpc-gateway/config-openapi.yml \
-	--openapiv2_opt generate_unbound_methods=true \
-	--openapiv2_opt allow_merge=true \
-	--openapiv2_opt merge_file_name=merged \
-	./proto/hello/*.proto
+# .PHONY: protoc-openapiv2-gateway
+# protoc-openapiv2-gateway:
+# 	protoc -I . --openapiv2_out ./protogen/gateway/openapiv2 \
+# 	--openapiv2_opt logtostderr=true \
+# 	--openapiv2_opt output_format=yaml \
+# 	--openapiv2_opt grpc_api_configuration=./grpc-gateway/config.yml \
+# 	--openapiv2_opt openapi_configuration=./grpc-gateway/config-openapi.yml \
+# 	--openapiv2_opt generate_unbound_methods=true \
+# 	--openapiv2_opt allow_merge=true \
+# 	--openapiv2_opt merge_file_name=merged \
+# 	./proto/hello/*.proto
 
-.PHONY: build-gateway
-build-gateway: clean-gateway protoc-go-gateway
+# .PHONY: build-gateway
+# build-gateway: clean-gateway protoc-go-gateway
 
-.PHONY: pipeline-init-gateway
-pipeline-init-gateway:
-	go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@latest
-	go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2@latest
+# .PHONY: pipeline-init-gateway
+# pipeline-init-gateway:
+# 	go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@latest
+# 	go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2@latest
 
-.PHONY: pipeline-build-gateway
-pipeline-build-gateway: pipeline-init-gateway build-gateway protoc-openapiv2-gateway
+# .PHONY: pipeline-build-gateway
+# pipeline-build-gateway: pipeline-init-gateway build-gateway protoc-openapiv2-gateway

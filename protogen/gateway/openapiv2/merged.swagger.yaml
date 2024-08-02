@@ -29,6 +29,26 @@ paths:
             $ref: '#/definitions/helloHelloRequest'
       tags:
         - HelloService
+  /hello.HelloService/SayManyHellos:
+    post:
+      operationId: HelloService_SayManyHellos
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/helloHelloResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/helloHelloRequest'
+      tags:
+        - HelloService
 definitions:
   helloHelloRequest:
     type: object
